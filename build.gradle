@@ -11,7 +11,8 @@ node {
 
 //declare a build task
 task build
-
+build.dependsOn nodeSetup
+npm_test.dependsOn nodeSetup
 //declare a task to create a zip of the app
 task zip(type: Zip) {
 	from ('.') {
@@ -28,8 +29,5 @@ task zip(type: Zip) {
 }
 
 //declare task dependencies
-build.dependsOn zip
-zip.dependsOn npm_build
-npm_build.dependsOn npm_test
-npm_test.dependsOn npmInstall
-npm_build.dependsOn npmInstall
+build.dependsOn nodeSetup
+zip.dependsOn nodeSetup
